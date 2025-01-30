@@ -38,5 +38,6 @@ Antes de iniciar, asegúrate de tener instalado lo siguiente:
  4. Accede a la documentación de Swagger:
    - Navega a https://localhost:5001/swagger para explorar y probar los endpoints.
 
-<a href="[https://i.imgur.com/6OTYRkX.png](https://github.com/user-attachments/assets/603d2a52-749e-4439-8da0-66b3ce9dcfe5)"><img src="[https://i.imgur.com/6OTYRkX.png](https://github.com/user-attachments/assets/603d2a52-749e-4439-8da0-66b3ce9dcfe5)" width="1000"></a>
+   ![I](https://github.com/user-attachments/assets/603d2a52-749e-4439-8da0-66b3ce9dcfe5)
+
 
