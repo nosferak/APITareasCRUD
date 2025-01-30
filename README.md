@@ -14,7 +14,7 @@ Antes de iniciar, asegúrate de tener instalado lo siguiente:
 ### **Configuración del proyecto**
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/APITareasCRUD.git
+   git clone https://github.com/nosferak/APITareasCRUD.git
    cd sistema-pedidos
 2.  Configura la cadena de conexión en el archivo appsettings.json del proyecto TareasCRUD.WebAPI:
     ```json
