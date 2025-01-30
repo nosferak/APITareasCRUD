@@ -24,8 +24,12 @@ namespace TareasCRUD.WebApi.Controllers
             _Mapper = mapper;
         }
 
-
-        [HttpGet("{id}")]
+        /// <summary>
+        /// Endpoint para obtener las tareas filtradas por estado.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("GetTareasByIdEstado/{id}")]
         public async Task<ActionResult<V_Estados>> GetTareasByIdEstado(int id)
         {
             var tarea = await _TareaService.GetTareasByIdEstado(id);
@@ -36,15 +40,39 @@ namespace TareasCRUD.WebApi.Controllers
             return Ok(tarea);
         }
 
-        [HttpGet]
+        /// <summary>
+        /// Endpoint para obtener todas las tareas.
+        /// </summary>
+        /// <returns></returns>
+        //[HttpGet]
+        [HttpGet("GetAllTareasEstado")]
         public async Task<ActionResult<IEnumerable<V_Estados>>> GetAllTareasEstado()
         {
             var tareas = await _TareaService.GetAllTareasEstado();
             return Ok(tareas);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<DTOCreateTareaResponse>> CreateTarea([FromBody] DTOCreateTareaRequest newTarea)
+        /// <summary>
+        /// Endpoint para obtener la cantidad de tareas por estado.
+        /// </summary>
+        /// <returns></returns>
+        //[HttpGet]
+        [HttpGet("GetEstadisticasTareasEstado")]
+        public async Task<ActionResult<IEnumerable<V_Tareas>>> GetEstadisticasTareasEstado()
+        {
+            var tareas = await _TareaService.GetEstadisticasTareasEstado();
+            return Ok(tareas);
+        }
+
+        /// <summary>
+        /// Endpoint para crear una nueva tarea.
+        /// </summary>
+        /// <param name="newTarea"></param>
+        /// <returns></returns>        
+        //[HttpPost]
+        [HttpPost("CreateTarea")]
+        //public async Task<ActionResult<DTOCreateTareaResponse>> CreateTarea([FromBody] DTOCreateTareaRequest newTarea)
+        public async Task<ActionResult<DTOCreateTareaResponse>> CreateTarea([FromForm] DTOCreateTareaRequest newTarea)
         {
             try
             {
@@ -57,8 +85,15 @@ namespace TareasCRUD.WebApi.Controllers
             }
         }
 
-        [HttpPut]
-        public async Task<ActionResult<DTOUpdateTareaResponse>> UpdateTarea([FromBody] DTOUpdateTareaRequest newTareaValues)
+        /// <summary>
+        /// Endpoint para actualizar una tarea.
+        /// </summary>
+        /// <param name="newTareaValues"></param>
+        /// <returns></returns>
+        //[HttpPut]
+        [HttpPut("UpdateTarea")]
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<DTOUpdateTareaResponse>> UpdateTarea([FromForm] DTOUpdateTareaRequest newTareaValues)
         {
             try
             {
@@ -71,7 +106,12 @@ namespace TareasCRUD.WebApi.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        /// <summary>
+        /// Endpoint para eliminar una tarea por Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("DeleteTarea/{id}")]
         public async Task<ActionResult> DeleteTarea(int id)
         {
             try

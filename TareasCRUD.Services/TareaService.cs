@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,24 +26,35 @@ namespace TareasCRUD.Service
         {
             _unitOfWork = unitOfWork;
         }
-    
+
         public async Task<DTOCreateTareaResponse> CreateTarea(DTOCreateTareaRequest newTarea)
+        //public async Task<DTOCreateTareaResponse> CreateTarea([FromForm] DTOCreateTareaRequest newTarea)
         {
-            
+
             TareaValidator validator = new();
 
             // Construcción de la entidad Tareas a partir del DTO de entrada
             Tareas tarea = new Tareas
-            {                
+            {
                 Nombre = newTarea.Nombre,
                 Descripcion = newTarea.Descripcion,
                 Prioridad = newTarea.Prioridad,
                 IdEstado = newTarea.IdEstado,
                 //IdUsuario = newTarea.IdUsuario,
                 FechaCreacion = DateTime.Now,
-                FechaVencimiento = newTarea.FechaVencimiento
+                FechaVencimiento = newTarea.FechaVencimiento,
                 //ArchivoPDF = newTarea.ArchivoPDF
             };
+
+            // Si se ha recibido un archivo PDF, lo convertimos a un arreglo de bytes
+            if (newTarea.ArchivoPDF != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await newTarea.ArchivoPDF.CopyToAsync(memoryStream);
+                    tarea.ArchivoPDF = memoryStream.ToArray(); // Guardamos el archivo como un arreglo de bytes
+                }
+            }
 
             DTOCreateTareaResponse TareaResult = new DTOCreateTareaResponse();
 
@@ -88,8 +100,9 @@ namespace TareasCRUD.Service
 
             return TareaResult;
         }
-    
+
         public async Task<DTOUpdateTareaResponse> UpdateTarea(DTOUpdateTareaRequest newTareaValues)
+        //public async Task<DTOUpdateTareaResponse> UpdateTarea([FromForm] DTOUpdateTareaRequest newTareaValues)
         {
             int TareaToBeUpdatedId = newTareaValues.Id;
             Tareas tareaToBeUpdated = await _unitOfWork.TareasRepository.GetByIdAsync(TareaToBeUpdatedId);
@@ -160,7 +173,8 @@ namespace TareasCRUD.Service
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task<V_Estados> GetTareasByIdEstado(int id)
+        //public async Task<V_Estados> GetTareasByIdEstado(int id)
+        public async Task<List<V_Estados>> GetTareasByIdEstado(int id)
         {
             return await _unitOfWork.TareasRepository.GetTareasByIdEstado(id)
                    ?? throw new KeyNotFoundException($"No se encontraron tareas con el estado ID {id}.");
@@ -169,6 +183,11 @@ namespace TareasCRUD.Service
         public async Task<IEnumerable<V_Estados>> GetAllTareasEstado()
         {
             return await _unitOfWork.TareasRepository.GetAllTareasEstado();
+        }
+
+        public async Task<IEnumerable<V_Tareas>> GetEstadisticasTareasEstado()
+        {
+            return await _unitOfWork.TareasRepository.GetEstadisticasTareasEstado();
         }
     }
 }

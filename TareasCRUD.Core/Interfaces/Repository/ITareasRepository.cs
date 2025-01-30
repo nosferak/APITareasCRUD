@@ -13,8 +13,11 @@ namespace TareasCRUD.Core.Interfaces.Repository
     //}
     public interface ITareasRepository : IBaseRepository<Tareas>
     {
+        //ValueTask<V_Estados> GetTareasByIdEstado(int Id);
+        Task<List<V_Estados>> GetTareasByIdEstado(int Id);
         Task<IEnumerable<V_Estados>> GetAllTareasEstado();
-        ValueTask<V_Estados> GetTareasByIdEstado(int Id);
+        Task<IEnumerable<V_Tareas>> GetEstadisticasTareasEstado();
+
 
         // Función para guardar un archivo PDF (si es necesario)
         //Task<string> GuardarArchivoPdfAsync(byte[] archivoPdf, string nombreArchivo);

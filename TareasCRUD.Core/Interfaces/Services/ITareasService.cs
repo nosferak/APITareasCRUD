@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,13 @@ namespace TareasCRUD.Core.Interfaces.Services
     //}
     public interface ITareasService
     {
+        //Task<DTOCreateTareaResponse> CreateTarea(DTOCreateTareaRequest newTarea);
         Task<DTOCreateTareaResponse> CreateTarea(DTOCreateTareaRequest newTarea);
         Task<DTOUpdateTareaResponse> UpdateTarea(DTOUpdateTareaRequest newTareaValues);
         Task DeleteTarea(int TareaId);
-        Task<V_Estados> GetTareasByIdEstado(int id);
+        //Task<V_Estados> GetTareasByIdEstado(int id);
+        Task<List<V_Estados>> GetTareasByIdEstado(int id);
         Task<IEnumerable<V_Estados>> GetAllTareasEstado();
+        Task<IEnumerable<V_Tareas>> GetEstadisticasTareasEstado();
     }
 }

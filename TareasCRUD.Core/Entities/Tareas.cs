@@ -18,8 +18,7 @@ namespace TareasCRUD.Core.Entities
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
         public DateTime? FechaActualizacion { get; set; }
         public DateTime? FechaVencimiento { get; set; }
-
-        //public string ArchivoPDF { get; set; }
+        public byte[] ArchivoPDF { get; set; }  //Almacenamos el archivo PDF como un arreglo de bytes
 
         // Relación con Estado
         public int IdEstado { get; set; }
@@ -28,6 +27,5 @@ namespace TareasCRUD.Core.Entities
         // Relación con Usuario
         //public int? IdUsuario { get; set; }
         //public Usuarios Usuario { get; set; }
-
     }
 }

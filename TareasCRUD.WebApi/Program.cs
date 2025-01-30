@@ -2,7 +2,7 @@ using TareasCRUD.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 // CREATE STARTUP INSTANCE
 var startup = new Startup(builder.Configuration);

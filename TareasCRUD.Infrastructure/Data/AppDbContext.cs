@@ -20,9 +20,9 @@ namespace TareasCRUD.Infrastructure.Data
         public DbSet<Tareas> Tareas { get; set; }
         //public DbSet<Usuarios> Usuarios { get; set; }
 
-
-        //implementamos Vista con las tareas generadas
+        //implementamos Vistas
         public DbSet<V_Estados> V_Estados { get; set; }
+        public DbSet<V_Tareas> V_Tareas { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -39,6 +39,12 @@ namespace TareasCRUD.Infrastructure.Data
                     .Entity<V_Estados>()
                     .ToView(nameof(V_Estados))
                     .HasKey(t => t.IdTarea);
+
+            builder
+                    .Entity<V_Tareas>()
+                    //.ToView("V_Tareas")
+                    .ToView(nameof(V_Tareas))
+                    .HasKey(t => t.IdEstado);
         }
     }
 }
