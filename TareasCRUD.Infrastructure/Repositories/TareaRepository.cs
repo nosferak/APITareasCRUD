@@ -22,14 +22,22 @@ namespace TareasCRUD.Infrastructure.Repositories
 
         }
 
+        //public async ValueTask<V_Estados> GetTareasByIdEstado(int Id)
+        public async Task<List<V_Estados>> GetTareasByIdEstado(int Id)
+        {
+            //return await Context.V_Estados.FindAsync(Id);
+            return await Context.V_Estados.Where(v => v.IdEstado == Id).ToListAsync();
+        }
         public async Task<IEnumerable<V_Estados>> GetAllTareasEstado()
         {
             return await Context.V_Estados.ToListAsync();
 
         }
-        public async ValueTask<V_Estados> GetTareasByIdEstado(int Id)
+        public async Task<IEnumerable<V_Tareas>> GetEstadisticasTareasEstado()
         {
-            return await Context.V_Estados.FindAsync(Id);
+            return await Context.V_Tareas.ToListAsync();
+
         }
+
     }
 }

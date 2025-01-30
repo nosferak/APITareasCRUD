@@ -71,6 +71,7 @@ namespace TareasCRUD.WebApi.Controllers
         /// <returns></returns>        
         //[HttpPost]
         [HttpPost("CreateTarea")]
+        [Consumes("multipart/form-data")]
         //public async Task<ActionResult<DTOCreateTareaResponse>> CreateTarea([FromBody] DTOCreateTareaRequest newTarea)
         public async Task<ActionResult<DTOCreateTareaResponse>> CreateTarea([FromForm] DTOCreateTareaRequest newTarea)
         {
